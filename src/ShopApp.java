@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
-public class Shop {
+public class ShopApp {
 
     private ArrayList<String> productTitles;
     private ArrayList<String> productTypes;
     private ArrayList<String> productIds;
 
-    public Shop()
+    public ShopApp()
     {
         productTitles = new ArrayList<String>();
         productTypes = new ArrayList<String>();
@@ -32,7 +32,7 @@ public class Shop {
     }
 
     public static void main(String[] args) {
-        Shop shop = new Shop();
+        ShopApp shop = new ShopApp();
 
         String menu = "1. Add product\n2. Show product\n3. Show rental price\n\n0. Quit";
         int choice = -1;
@@ -49,7 +49,7 @@ public class Shop {
         }
     }
 
-    public static void addProduct(Shop shop) {
+    public static void addProduct(ShopApp shop) {
         String title = JOptionPane.showInputDialog("Enter the title:");
         String id = JOptionPane.showInputDialog("Enter the id:");
         String type = JOptionPane.showInputDialog("Enter the type (M for movie/G for game):");
@@ -59,7 +59,7 @@ public class Shop {
         shop.productTypes.add(type);
     }
 
-    public static void showProduct(Shop shop){
+    public static void showProduct(ShopApp shop){
         String id = JOptionPane.showInputDialog("Enter the id:");
         int idx = -1;
         boolean found = false;
@@ -77,7 +77,7 @@ public class Shop {
         }
     }
 
-    public static void showPrice(Shop shop){
+    public static void showPrice(ShopApp shop){
         String id = JOptionPane.showInputDialog("Enter the id:");
         int idx = -1;
         boolean found = false;
