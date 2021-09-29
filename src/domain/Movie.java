@@ -6,7 +6,9 @@ public class Movie extends Product {
     }
 
     @Override
-    public double getPrice() {
-        return 0;
+    public double getPrice(int dagen) {
+        double price = 5;
+        if (dagen < 3) return price;
+        else return price + (dagen - 3) * 1.5;
     }
 }

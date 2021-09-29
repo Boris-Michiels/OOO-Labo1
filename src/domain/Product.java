@@ -26,5 +26,5 @@ public abstract class Product {
     }
 
 
-    public abstract double getPrice();
+    public abstract double getPrice(int dagen);
 }
