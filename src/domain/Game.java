@@ -7,6 +7,6 @@ public class Game extends Product {
 
     @Override
     public double getPrice(int dagen) {
-        return dagen * ;
+        return dagen * 3;
     }
 }

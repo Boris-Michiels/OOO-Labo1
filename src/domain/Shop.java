@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Shop {
     private String naam;
@@ -35,5 +34,7 @@ public class Shop {
         return new ArrayList<>(products.values());
     }
 
-    public Double
+    public Double getPrice(String id, int dagen) {
+        return this.products.get(id).getPrice(dagen);
+    }
 }
