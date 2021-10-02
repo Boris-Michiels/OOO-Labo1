@@ -1,9 +1,8 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Shop {
     private String naam;
@@ -31,7 +30,7 @@ public class Shop {
     }
 
     public List<Product> getProducts() {
-        List<Product> products = new ArrayList<>();
+        /*List<Product> products = new ArrayList<>();
         for (Product p : this.products.values()) {
             if (p instanceof Movie) {
                 products.add(p);
@@ -47,10 +46,25 @@ public class Shop {
                 products.add(p);
             }
         }
-        return products;
+        return products;*/
+        return products.values().stream().sorted(new ProductComparator()).collect(Collectors.toList());
     }
 
     public Double getPrice(String id, int dagen) {
         return this.products.get(id).getPrice(dagen);
+    }
+}
+
+class ProductComparator implements Comparator<Product> {
+    private Map<String, Integer> sort = Stream.of(new Object[][] {
+            { "Movie", 1 },
+            { "Game", 2 },
+            { "CD", 3 },
+    }).collect(Collectors.toMap(data -> (String) data[0], data -> (Integer) data[1]));
+
+    @Override
+    public int compare(Product p1, Product p2) {
+        //if (p1.getClass() == p2.getClass()) return 0;
+        return sort.get(p1.getClass().getSimpleName()) - sort.get(p2.getClass().getSimpleName());
     }
 }
