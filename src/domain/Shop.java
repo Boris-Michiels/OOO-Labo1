@@ -31,7 +31,23 @@ public class Shop {
     }
 
     public List<Product> getProducts() {
-        return new ArrayList<>(products.values());
+        List<Product> products = new ArrayList<>();
+        for (Product p : this.products.values()) {
+            if (p instanceof Movie) {
+                products.add(p);
+            }
+        }
+        for (Product p : this.products.values()) {
+            if (p instanceof Game) {
+                products.add(p);
+            }
+        }
+        for (Product p : this.products.values()) {
+            if (p instanceof CD) {
+                products.add(p);
+            }
+        }
+        return products;
     }
 
     public Double getPrice(String id, int dagen) {
