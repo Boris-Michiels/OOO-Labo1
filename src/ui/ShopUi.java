@@ -13,20 +13,10 @@ public class ShopUi {
     public ShopUi() {
         shop = new Shop("Shop 1");
         menu = "1. Add product\n2. Show product\n3. Show all products\n4. Show rental price\n\n0. Quit";
-        try {
-            FileInputStream fis = new FileInputStream("shop.txt");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            Map<String, Product> map = (Map<String, Product>) ois.readObject();
-            ois.close();
-            shop.setProductMap(map);
-        } catch (FileNotFoundException ignored) {
-
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e);
-        }
+        readProducts();
     }
 
-    public void ShowMenu() throws IOException {
+    public void ShowMenu() {
         int choice = -1;
         while (choice != 0) {
             String choiceString = JOptionPane.showInputDialog(menu);
@@ -41,17 +31,14 @@ public class ShopUi {
                 showPrice(shop);
             }
         }
-        FileOutputStream fos = new FileOutputStream("shop.txt");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(shop.getProductMap());
-        oos.close();
+        saveProducts();
     }
 
     public void addProduct(Shop shop) {
         String typeMenu = "1. Movie\n2. Game\n3. Cd\n\n0. Cancel";
         String typeString = JOptionPane.showInputDialog(typeMenu);
         int typeChoice = Integer.parseInt(typeString);
-        if (typeChoice <= 0 || typeChoice >= 3) return;
+        if (typeChoice <= 0 || typeChoice > 3) return;
         String title = JOptionPane.showInputDialog("Enter the title:");
         Product p = null;
 
@@ -67,8 +54,23 @@ public class ShopUi {
 
     public void showProduct(Shop shop) {
         String id = JOptionPane.showInputDialog("Enter the id:");
+        showProduct(id);
+    }
+
+    public void showProduct(String id) {
         Product p = shop.getProduct(id);
-        JOptionPane.showMessageDialog(null, p.getTitle());
+        String toggleString = JOptionPane.showInputDialog(null, "Titel: " + p.getTitle() + "\nCategorie: " + p.getClass().getSimpleName() +
+                "\nOmschrijving: " + p.getDescription() + "\nBeschikbaar: " + (p.isAvailable() ? "Ja" : "Nee") + "\n\n1. Schakel beschikbaarheid" +
+                "\n\n0. Terug");
+        try {
+            int toggle = Integer.parseInt(toggleString);
+            if (toggle == 1) {
+                shop.toggleAvailable(id);
+                showProduct(id);
+            }
+        } catch (NumberFormatException ignored) {
+
+        }
     }
 
     public void showProducts(Shop shop) {
@@ -84,5 +86,30 @@ public class ShopUi {
         String daysString = JOptionPane.showInputDialog("Enter the number of days:");
         int days = Integer.parseInt(daysString);
         JOptionPane.showMessageDialog(null, shop.getPrice(id, days));
+    }
+
+    private void readProducts() {
+        try {
+            FileInputStream fis = new FileInputStream("shop.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Map<String, Product> map = (Map<String, Product>) ois.readObject();
+            ois.close();
+            shop.setProductMap(map);
+        } catch (FileNotFoundException ignored) {
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void saveProducts() {
+        try {
+            FileOutputStream fos = new FileOutputStream("shop.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(shop.getProductMap());
+            oos.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }

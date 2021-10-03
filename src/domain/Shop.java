@@ -2,7 +2,6 @@ package domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Shop {
     private String naam;
@@ -46,18 +45,8 @@ public class Shop {
     public Double getPrice(String id, int dagen) {
         return this.products.get(id).getPrice(dagen);
     }
-}
 
-
-class ProductComparator implements Comparator<Product> {
-    private Map<String, Integer> sort = Stream.of(new Object[][] {
-            { "Movie", 1 },
-            { "Game", 2 },
-            { "CD", 3 },
-    }).collect(Collectors.toMap(data -> (String) data[0], data -> (Integer) data[1]));
-
-    @Override
-    public int compare(Product p1, Product p2) {
-        return sort.get(p1.getClass().getSimpleName()) - sort.get(p2.getClass().getSimpleName());
+    public void toggleAvailable(String id) {
+        products.get(id).toggleAvailable();
     }
 }
