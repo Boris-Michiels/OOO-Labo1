@@ -5,8 +5,8 @@ public abstract class Product {
     private String title;
 
     public Product(String title, String id) {
-        this.id = id;
-        this.title = title;
+        setId(id);
+        setTitle(title);
     }
 
     public String getId() {
@@ -25,6 +25,12 @@ public abstract class Product {
         this.title = title;
     }
 
-
     public abstract double getPrice(int dagen);
+
+    @Override
+    public String toString() {
+        StringBuilder products = new StringBuilder();
+        products.append("Categorie: ").append(getClass().getSimpleName()).append(" Id: ").append(getId()).append(" Omschrijving: ").append(getTitle());
+        return products.toString();
+    }
 }

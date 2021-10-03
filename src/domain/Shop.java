@@ -30,23 +30,6 @@ public class Shop {
     }
 
     public List<Product> getProducts() {
-        /*List<Product> products = new ArrayList<>();
-        for (Product p : this.products.values()) {
-            if (p instanceof Movie) {
-                products.add(p);
-            }
-        }
-        for (Product p : this.products.values()) {
-            if (p instanceof Game) {
-                products.add(p);
-            }
-        }
-        for (Product p : this.products.values()) {
-            if (p instanceof CD) {
-                products.add(p);
-            }
-        }
-        return products;*/
         return products.values().stream().sorted(new ProductComparator()).collect(Collectors.toList());
     }
 
@@ -54,6 +37,7 @@ public class Shop {
         return this.products.get(id).getPrice(dagen);
     }
 }
+
 
 class ProductComparator implements Comparator<Product> {
     private Map<String, Integer> sort = Stream.of(new Object[][] {
@@ -64,7 +48,6 @@ class ProductComparator implements Comparator<Product> {
 
     @Override
     public int compare(Product p1, Product p2) {
-        //if (p1.getClass() == p2.getClass()) return 0;
         return sort.get(p1.getClass().getSimpleName()) - sort.get(p2.getClass().getSimpleName());
     }
 }
