@@ -3,6 +3,8 @@ package ui;
 import domain.*;
 
 import javax.swing.*;
+import java.io.*;
+import java.util.Map;
 
 public class ShopUi {
     private Shop shop;
@@ -11,9 +13,20 @@ public class ShopUi {
     public ShopUi() {
         shop = new Shop("Shop 1");
         menu = "1. Add product\n2. Show product\n3. Show all products\n4. Show rental price\n\n0. Quit";
+        try {
+            FileInputStream fis = new FileInputStream("shop.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Map<String, Product> map = (Map<String, Product>) ois.readObject();
+            ois.close();
+            shop.setProductMap(map);
+        } catch (FileNotFoundException ignored) {
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
     }
 
-    public void ShowMenu() {
+    public void ShowMenu() throws IOException {
         int choice = -1;
         while (choice != 0) {
             String choiceString = JOptionPane.showInputDialog(menu);
@@ -28,6 +41,10 @@ public class ShopUi {
                 showPrice(shop);
             }
         }
+        FileOutputStream fos = new FileOutputStream("shop.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(shop.getProductMap());
+        oos.close();
     }
 
     public void addProduct(Shop shop) {

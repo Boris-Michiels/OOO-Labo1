@@ -35,6 +35,14 @@ public class Shop {
         return products.values().stream().sorted(new ProductComparator()).collect(Collectors.toList());
     }
 
+    public Map<String, Product> getProductMap() {
+        return products;
+    }
+
+    public void setProductMap(Map<String, Product> map) {
+        this.products = map;
+    }
+
     public Double getPrice(String id, int dagen) {
         return this.products.get(id).getPrice(dagen);
     }

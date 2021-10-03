@@ -7,6 +7,10 @@ public class ShopApp {
 
     public static void main(String[] args) {
         ShopUi shopUi = new ShopUi();
-        shopUi.ShowMenu();
+        try {
+            shopUi.ShowMenu();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
