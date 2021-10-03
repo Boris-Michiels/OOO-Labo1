@@ -9,6 +9,10 @@ public abstract class Product {
         setTitle(title);
     }
 
+    public Product(String title) {
+        setTitle(title);
+    }
+
     public String getId() {
         return id;
     }
@@ -30,7 +34,7 @@ public abstract class Product {
     @Override
     public String toString() {
         StringBuilder products = new StringBuilder();
-        products.append("Categorie: ").append(getClass().getSimpleName()).append(" Id: ").append(getId()).append(" Omschrijving: ").append(getTitle());
+        products.append("Categorie: ").append(getClass().getSimpleName()).append("  Titel: ").append(getTitle()).append("  Id: ").append(getId()).append("  Omschrijving: ").append(getTitle());
         return products.toString();
     }
 }

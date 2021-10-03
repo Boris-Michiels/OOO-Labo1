@@ -5,6 +5,10 @@ public class Game extends Product {
         super(title, id);
     }
 
+    public Game(String title) {
+        super(title);
+    }
+
     @Override
     public double getPrice(int dagen) {
         return dagen * 3;

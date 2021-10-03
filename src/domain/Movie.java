@@ -5,6 +5,10 @@ public class Movie extends Product {
         super(title, id);
     }
 
+    public Movie(String title) {
+        super(title);
+    }
+
     @Override
     public double getPrice(int dagen) {
         double price = 5;

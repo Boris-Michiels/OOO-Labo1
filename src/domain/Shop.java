@@ -22,6 +22,8 @@ public class Shop {
     }
 
     public void addProduct(Product p) {
+        int count = products.values().size();
+        p.setId(Integer.toString(count + 1));
         this.products.put(p.getId(), p);
     }
 

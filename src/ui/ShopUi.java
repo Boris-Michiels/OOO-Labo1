@@ -36,15 +36,14 @@ public class ShopUi {
         int typeChoice = Integer.parseInt(typeString);
         if (typeChoice <= 0 || typeChoice >= 3) return;
         String title = JOptionPane.showInputDialog("Enter the title:");
-        String id = JOptionPane.showInputDialog("Enter the id:");
         Product p = null;
 
         if (typeChoice == 1) {
-            p = new Movie(title, id);
+            p = new Movie(title);
         } else if (typeChoice == 2) {
-            p = new Game(title, id);
+            p = new Game(title);
         } else if (typeChoice == 3) {
-            p = new CD(title, id);
+            p = new CD(title);
         }
         shop.addProduct(p);
     }
