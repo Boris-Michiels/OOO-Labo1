@@ -1,15 +1,18 @@
 package domain;
 
+import db.ProductDb;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Shop {
     private String naam;
-    private Map<String, Product> products;
+    private ProductDb db;
 
     public Shop(String naam) {
         setNaam(naam);
-        this.products = new HashMap();
+        db = new ProductDb();
+        db.loadProducts();
     }
 
     public String getNaam() {
@@ -21,32 +24,36 @@ public class Shop {
     }
 
     public void addProduct(Product p) {
-        int count = products.values().size();
+        int count = getProductMap().values().size();
         p.setId(Integer.toString(count + 1));
-        this.products.put(p.getId(), p);
+        db.addProduct(p);
     }
 
     public Product getProduct(String id) {
-        return this.products.get(id);
+        return db.getProduct(id);
     }
 
     public List<Product> getProducts() {
-        return products.values().stream().sorted(new ProductComparator()).collect(Collectors.toList());
+        return db.getProducts().stream().sorted(new ProductComparator()).collect(Collectors.toList());
     }
 
     public Map<String, Product> getProductMap() {
-        return products;
+        return db.getProductMap();
     }
 
     public void setProductMap(Map<String, Product> map) {
-        this.products = map;
+        db.setProductMap(map);
     }
 
     public Double getPrice(String id, int dagen) {
-        return this.products.get(id).getPrice(dagen);
+        return getProduct(id).getPrice(dagen);
     }
 
     public void toggleAvailable(String id) {
-        products.get(id).toggleAvailable();
+        getProduct(id).toggleAvailable();
+    }
+
+    public void close() {
+        db.storeProducts();
     }
 }

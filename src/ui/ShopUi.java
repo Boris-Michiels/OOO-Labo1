@@ -3,8 +3,6 @@ package ui;
 import domain.*;
 
 import javax.swing.*;
-import java.io.*;
-import java.util.Map;
 
 public class ShopUi {
     private Shop shop;
@@ -13,7 +11,6 @@ public class ShopUi {
     public ShopUi() {
         shop = new Shop("Shop 1");
         menu = "1. Add product\n2. Show product\n3. Show all products\n4. Show rental price\n\n0. Quit";
-        readProducts();
     }
 
     public void ShowMenu() {
@@ -31,7 +28,7 @@ public class ShopUi {
                 showPrice(shop);
             }
         }
-        saveProducts();
+        shop.close();
     }
 
     public void addProduct(Shop shop) {
@@ -86,30 +83,5 @@ public class ShopUi {
         String daysString = JOptionPane.showInputDialog("Enter the number of days:");
         int days = Integer.parseInt(daysString);
         JOptionPane.showMessageDialog(null, shop.getPrice(id, days));
-    }
-
-    private void readProducts() {
-        try {
-            FileInputStream fis = new FileInputStream("shop.txt");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            Map<String, Product> map = (Map<String, Product>) ois.readObject();
-            ois.close();
-            shop.setProductMap(map);
-        } catch (FileNotFoundException ignored) {
-
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e);
-        }
-    }
-
-    private void saveProducts() {
-        try {
-            FileOutputStream fos = new FileOutputStream("shop.txt");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(shop.getProductMap());
-            oos.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
     }
 }
