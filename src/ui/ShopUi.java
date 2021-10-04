@@ -59,9 +59,9 @@ public class ShopUi {
 
     public void showProduct(String id) {
         Product p = shop.getProduct(id);
-        String toggleString = JOptionPane.showInputDialog(null, "Titel: " + p.getTitle() + "\nCategorie: " + p.getClass().getSimpleName() +
-                "\nOmschrijving: " + p.getDescription() + "\nBeschikbaar: " + (p.isAvailable() ? "Ja" : "Nee") + "\n\n1. Schakel beschikbaarheid" +
-                "\n\n0. Terug");
+        String toggleString = JOptionPane.showInputDialog(null, "Title: " + p.getTitle() + "\nCategory: " + p.getClass().getSimpleName() +
+                "\nDescription: " + p.getDescription() + "\nAvailable: " + (p.isAvailable() ? "Yes" : "No") + "\n\n1. Toggle availability" +
+                "\n\n0. Back");
         try {
             int toggle = Integer.parseInt(toggleString);
             if (toggle == 1) {
