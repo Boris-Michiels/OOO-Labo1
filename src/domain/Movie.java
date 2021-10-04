@@ -1,18 +1,15 @@
 package domain;
 
+import domain.rentcalc.MovieRentCalculator;
+
 public class Movie extends Product {
     public Movie(String title, String id) {
         super(title, id);
+        setRentCalculator(new MovieRentCalculator());
     }
 
     public Movie(String title) {
         super(title);
-    }
-
-    @Override
-    public double getPrice(int dagen) {
-        double price = 5;
-        if (dagen <= 3) return price;
-        else return price + (dagen - 3) * 2;
+        setRentCalculator(new MovieRentCalculator());
     }
 }

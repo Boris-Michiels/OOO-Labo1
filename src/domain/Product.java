@@ -1,5 +1,7 @@
 package domain;
 
+import domain.rentcalc.RentCalculator;
+
 import java.io.Serializable;
 
 public abstract class Product implements Serializable {
@@ -7,6 +9,7 @@ public abstract class Product implements Serializable {
     private String title;
     private String description = "";
     private boolean available = true;
+    private RentCalculator rentCalculator;
 
     public Product(String title, String id, boolean available) {
         setId(id);
@@ -59,7 +62,17 @@ public abstract class Product implements Serializable {
         available = !available;
     }
 
-    public abstract double getPrice(int dagen);
+    public double getPrice(int days) {
+        return rentCalculator.getPrice(days);
+    }
+
+    public RentCalculator getRentCalculator() {
+        return rentCalculator;
+    }
+
+    public void setRentCalculator(RentCalculator rentCalculator) {
+        this.rentCalculator = rentCalculator;
+    }
 
     @Override
     public String toString() {

@@ -82,6 +82,6 @@ public class ShopUi {
         String id = JOptionPane.showInputDialog("Enter the id:");
         String daysString = JOptionPane.showInputDialog("Enter the number of days:");
         int days = Integer.parseInt(daysString);
-        JOptionPane.showMessageDialog(null, shop.getPrice(id, days));
+        JOptionPane.showMessageDialog(null, shop.getProduct(id) + "\n\n" + shop.getPrice(id, days));
     }
 }

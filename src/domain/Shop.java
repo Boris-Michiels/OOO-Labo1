@@ -45,8 +45,8 @@ public class Shop {
         db.setProductMap(map);
     }
 
-    public Double getPrice(String id, int dagen) {
-        return getProduct(id).getPrice(dagen);
+    public Double getPrice(String id, int days) {
+        return getProduct(id).getPrice(days);
     }
 
     public void toggleAvailable(String id) {

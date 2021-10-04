@@ -1,16 +1,15 @@
 package domain;
 
+import domain.rentcalc.CDRentCalculator;
+
 public class CD extends Product {
     public CD(String title , String id) {
         super(title,id);
+        setRentCalculator(new CDRentCalculator());
     }
 
     public CD(String title) {
         super(title);
-    }
-
-    @Override
-    public double getPrice(int dagen) {
-        return 1.5 * dagen;
+        setRentCalculator(new CDRentCalculator());
     }
 }
