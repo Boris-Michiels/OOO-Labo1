@@ -6,21 +6,21 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Shop {
-    private String naam;
+    private String name;
     private ProductDb db;
 
-    public Shop(String naam) {
-        setNaam(naam);
+    public Shop(String name) {
+        setName(name);
         db = new ProductDb();
-        db.loadProducts();
+        db.loadProducts(name);
     }
 
-    public String getNaam() {
-        return naam;
+    public String getName() {
+        return name;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void addProduct(Product p) {
@@ -54,6 +54,6 @@ public class Shop {
     }
 
     public void close() {
-        db.storeProducts();
+        db.storeProducts(name);
     }
 }

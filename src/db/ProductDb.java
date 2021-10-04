@@ -35,9 +35,9 @@ public class ProductDb {
         this.products = map;
     }
 
-    public void loadProducts() {
+    public void loadProducts(String name) {
         try {
-            FileInputStream fis = new FileInputStream("shop.txt");
+            FileInputStream fis = new FileInputStream(name + ".txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
             Map<String, Product> map = (Map<String, Product>) ois.readObject();
             ois.close();
@@ -49,9 +49,9 @@ public class ProductDb {
         }
     }
 
-    public void storeProducts() {
+    public void storeProducts(String name) {
         try {
-            FileOutputStream fos = new FileOutputStream("shop.txt");
+            FileOutputStream fos = new FileOutputStream(name + ".txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(getProductMap());
             oos.close();
