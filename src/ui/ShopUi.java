@@ -54,10 +54,10 @@ public class ShopUi {
 
     public void showProduct(Shop shop) {
         String id = JOptionPane.showInputDialog("Enter the id:");
-        showProduct(id);
+        showProduct(shop, id);
     }
 
-    public void showProduct(String id) {
+    public void showProduct(Shop shop, String id) {
         Product p = shop.getProduct(id);
         String toggleString = JOptionPane.showInputDialog(null, "Title: " + p.getTitle() + "\nCategory: " + p.getClass().getSimpleName() +
                 "\nDescription: " + p.getDescription() + "\nAvailable: " + (p.isAvailable() ? "Yes" : "No") + "\n\n1. Toggle availability" +
@@ -66,7 +66,7 @@ public class ShopUi {
             int toggle = Integer.parseInt(toggleString);
             if (toggle == 1) {
                 shop.toggleAvailable(id);
-                showProduct(id);
+                showProduct(shop, id);
             }
         } catch (NumberFormatException ignored) {
 
